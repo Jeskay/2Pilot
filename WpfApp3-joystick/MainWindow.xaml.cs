@@ -36,9 +36,9 @@ namespace WpfApp3_joystick
     {
 
         //изображение`  
-        private VideoCapture Defaultcapture = new VideoCapture(0);
-        private VideoCapture Secondcapture = new VideoCapture(700);
-        private VideoCapture Firstcapture = new VideoCapture(1);
+        private VideoCapture Defaultcapture = new VideoCapture(700);
+        private VideoCapture Secondcapture = new VideoCapture(1);
+        private VideoCapture Firstcapture = new VideoCapture(0);
 
         DispatcherTimer VideoTimer = new DispatcherTimer();
         private Recognition Recognition = new Recognition();
@@ -64,11 +64,22 @@ namespace WpfApp3_joystick
                 RulerFirstCamera_RB.Visibility = Visibility.Collapsed;
                 RecognitionFirstCamera_RB.Visibility = Visibility.Collapsed;
             }
-            /*if (!Secondcapture.IsOpened)
+            try
+            {
+                Mat Test = Firstcapture.QueryFrame();
+                if (Test == null) throw new NullReferenceException();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                RulerFirstCamera_RB.Visibility = Visibility.Collapsed;
+                RecognitionFirstCamera_RB.Visibility = Visibility.Collapsed;
+            }
+            if (!Secondcapture.IsOpened)
             {
                 RulerSecondCamera_RB.Visibility = Visibility.Collapsed;
                 RecognitionSecondCamera_RB.Visibility = Visibility.Collapsed;
-            }*/
+            }
             VideoTimer.Tick += new EventHandler(VTimer_Tick);
             VideoTimer.Interval = new TimeSpan(0, 0, 0, 0, 10);
             VideoTimer.Start();
@@ -178,7 +189,7 @@ namespace WpfApp3_joystick
 
         private void RecognitionSecondCamera_RB_Checked(object sender, RoutedEventArgs e)
         {
-            //mainView.RecognitionCamera = Secondcapture;
+            mainView.RecognitionCamera = Secondcapture;
         }
 
         private void RulerStandartCamera_RB_Checked(object sender, RoutedEventArgs e)
@@ -193,7 +204,7 @@ namespace WpfApp3_joystick
 
         private void RulerSecondCamera_RB_Checked(object sender, RoutedEventArgs e)
         {
-            //mainView.RulerCamera = Secondcapture;
+            mainView.RulerCamera = Secondcapture;
         }
     }
 }

@@ -105,6 +105,16 @@ namespace WpfApp3_joystick
 
         private void TextBox2_TextChanged(object sender, TextChangedEventArgs e)
         {
+            try
+            {
+                distance = Convert.ToDouble(TextBox2.Text);
+            }
+            catch (Exception ex)
+            {
+                distance = 50;
+            }
+            k = Math.Sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)) / distance;
+            TextBox1.Text = "range = " + Math.Round(Math.Sqrt((x4 - x3) * (x4 - x3) + (y4 - y3) * (y4 - y3)) / k);//вывод результата
 
         }
 

@@ -49,6 +49,7 @@ namespace WpfApp3_joystick
                         CvInvoke.DrawContours(image, findfigures, i, new MCvScalar(255, 0, 0), 3);
                         Squares++;
                     }
+                    
                     else if (Is_Triangle(findfigures[i]))
                     {
                         CvInvoke.DrawContours(image, findfigures, i, new MCvScalar(0, 255, 0), 3);
@@ -84,7 +85,7 @@ namespace WpfApp3_joystick
         }
         public bool Is_Rectangle(VectorOfPoint hull)
         {
-            CvInvoke.ApproxPolyDP(hull, hull, 15, true);
+            CvInvoke.ApproxPolyDP(hull, hull, 2, true);
             if (hull.Size == 4)
             {
                 System.Drawing.Rectangle r = CvInvoke.BoundingRectangle(hull);
@@ -99,13 +100,13 @@ namespace WpfApp3_joystick
         }
         public bool Is_Square(VectorOfPoint hull)
         {
-            CvInvoke.ApproxPolyDP(hull, hull, 15, true);
+            CvInvoke.ApproxPolyDP(hull, hull, 10, true);
             if (hull.Size == 4)
             {
                 System.Drawing.Rectangle r = CvInvoke.BoundingRectangle(hull);
                 double minr = Math.Min(r.Width, r.Height);
                 double maxr = Math.Max(r.Height, r.Width);
-                if (minr / maxr > 0.7)
+                if (minr / maxr > 0.4)
                 {
                     return true;
                 }
@@ -114,8 +115,8 @@ namespace WpfApp3_joystick
         }
         public bool Is_Circle(VectorOfPoint hull)
         {
-            CvInvoke.ApproxPolyDP(hull, hull, 10, true);
-            if (hull.Size > 5)
+            CvInvoke.ApproxPolyDP(hull, hull, 5, true);
+            if (hull.Size >= 5)
             {
                 double area = CvInvoke.ContourArea(hull);
                 System.Drawing.Rectangle r = CvInvoke.BoundingRectangle(hull);
