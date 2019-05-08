@@ -1,0 +1,91 @@
+﻿<Window x:Name="MainWin" x:Class="WpfApp3_joystick.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp3_joystick"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="777.666" Width="1080" Loaded="MainWin_Loaded" MaxWidth="1920" MaxHeight="1080" KeyUp="Keyboard_KeyUp">
+    <Window.Resources>
+        <Style TargetType="TextBox" x:Key="TBGreyTheme">
+            <Setter Property="Width" Value="235"/>
+            <Setter Property="Height" Value="80"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="FontSize" Value="21"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
+        <Style TargetType="Label" x:Key="LabelGreyTheme">
+            <Setter Property="Width" Value="210"/>
+            <Setter Property="Height" Value="80"/>
+            <Setter Property="FontSize" Value="20"/>
+        </Style>
+    </Window.Resources>
+    <TabControl x:Name="Programs_TabControl" HorizontalAlignment="Right" Height="748" Margin="0,0,2,-1" VerticalAlignment="Top" Width="1070">
+        <TabItem x:Name="Ruler_Tab" Header="Ruler" GotFocus="Ruler_Tab_GotFocus">
+            <Grid x:Name="RulerTab_Grid" Background="#FFE5E5E5">
+                <Grid x:Name="myGrid" Margin="-6,0,199,0" HorizontalAlignment="Right" Width="871" Height="675" VerticalAlignment="Bottom" Panel.ZIndex="2">
+                    <Image x:Name="ImageWebcam1" HorizontalAlignment="Left" MaxWidth="847" VerticalAlignment="Top" Grid.ColumnSpan="3" Panel.ZIndex="3"/>
+                </Grid>
+                <MediaElement x:Name="ME_test" Grid.Column="2" HorizontalAlignment="Left" Height="368" Margin="57,337,0,0" VerticalAlignment="Top" Width="492" LoadedBehavior="Manual" Source="Video/Putin.mp4" Volume="2" Visibility="Collapsed" Panel.ZIndex="4"/>
+                <GroupBox x:Name="Images_GroupBox" Header="Images" Margin="0,10,1,20" HorizontalAlignment="Right" Width="193" Panel.ZIndex="3">
+                    <Grid x:Name="Images_Grid" HorizontalAlignment="Left" Height="516" Margin="-6,-6,-12,-6" VerticalAlignment="Top" Width="199" >
+                        <ListBox x:Name="Images_Box" HorizontalAlignment="Left" Height="691" Margin="10,10,0,-185" Background="CornflowerBlue" VerticalAlignment="Top" Width="179"/>
+                    </Grid>
+                </GroupBox>
+                <ComboBox x:Name="RulerCamera_ComboBox" HorizontalAlignment="Left" Height="46" Margin="0,-1,0,675" VerticalAlignment="Bottom" Width="252">
+                    <RadioButton x:Name="RulerStandartCamera_RB" Content="Default Camera" Height="50" Width="245" GroupName="RulerCameraSelection" Checked="RulerStandartCamera_RB_Checked" IsChecked="True"/>
+                    <RadioButton x:Name="RulerFirstCamera_RB" Content="Camera 1" Height="50" Width="245" GroupName="RulerCameraSelection" Checked="RulerFirstCamera_RB_Checked"/>
+                    <RadioButton x:Name="RulerSecondCamera_RB" Content="Camera 2" Height="50" Width="245" GroupName="RulerCameraSelection" Checked="RulerSecondCamera_RB_Checked"/>
+                </ComboBox>
+            </Grid>
+        </TabItem>
+        <TabItem x:Name="Recognition_Tab" Header="Recognition" GotFocus="Recognition_Tab_GotFocus">
+            <Grid x:Name="Main_Grid">
+
+                <GroupBox x:Name="FindFigures_GroupBox" Header="Finded Figures" HorizontalAlignment="Left" Height="700" Margin="847,10,0,0" VerticalAlignment="Top" Width="217">
+                    <Grid x:Name="GoupBox_Grid" HorizontalAlignment="Left" Height="668" VerticalAlignment="Top" Width="197" Margin="10,10,-2,0">
+                        <Canvas x:Name="Figures_Canvas" HorizontalAlignment="Left" Height="658" VerticalAlignment="Top" Width="118">
+                            <Polygon Points="10,110 60,10 110,110" Fill="Black" Height="130" Canvas.Top="161" Width="118" />
+                            <Ellipse Canvas.Left="23" Fill="Black" Height="75" Width="75" Canvas.Top="10" />
+                            <Rectangle Width="100" Height="39" Fill="Black" Canvas.Left="10" Canvas.Top="424" />
+                            <Rectangle Width="70" Height="70" Fill="Black" Canvas.Left="23" Canvas.Top="569" />
+                        </Canvas>
+                        <Label x:Name="Circles_Label" Content="{Binding Circles}" HorizontalAlignment="Left" Height="80" Margin="118,10,0,0" VerticalAlignment="Top" Width="79" FontSize="24"/>
+                        <Label x:Name="Triangles_Label" Content="{Binding Triangles}" HorizontalAlignment="Left" Height="75" Margin="118,187,0,0" VerticalAlignment="Top" Width="79" FontSize="24"/>
+                        <Label x:Name="Rectangle_Label" Content="{Binding Lines}" HorizontalAlignment="Left" Height="68" Margin="118,404,0,0" VerticalAlignment="Top" Width="79" FontSize="24"/>
+                        <Label x:Name="Square_Label" Content="{Binding Squares}" HorizontalAlignment="Left" Height="76" Margin="118,570,0,0" VerticalAlignment="Top" Width="79" FontSize="24"/>
+                    </Grid>
+                </GroupBox>
+                <Grid x:Name="ReacognitioCamera_Grid" HorizontalAlignment="Left" Height="669" Margin="0,51,0,0" VerticalAlignment="Top" Width="847">
+                    <Image x:Name="Image1" HorizontalAlignment="Left" MaxWidth="847" VerticalAlignment="Top"/>
+                </Grid>
+                <ComboBox x:Name="RecognitionCamera_ComboBox" HorizontalAlignment="Left" Height="46" Margin="0,-1,0,675" VerticalAlignment="Bottom" Width="252">
+                    <RadioButton x:Name="RecognitionStandartCamera_RB" Content="Default Camera" Height="50" Width="245" GroupName="RecognitionCameraSelection" Checked="RecognitionStandartCamera_RB_Checked" IsChecked="True"/>
+                    <RadioButton x:Name="RecognitionFirstCamera_RB" Content="Camera 1" Height="50" Width="245" GroupName="RecognitionCameraSelection" Checked="RecognitionFirstCamera_RB_Checked"/>
+                    <RadioButton x:Name="RecognitionSecondCamera_RB" Content="Camera 2" Height="50" Width="245" GroupName="RecognitionCameraSelection" Checked="RecognitionSecondCamera_RB_Checked"/>
+                </ComboBox>
+            </Grid>
+        </TabItem>
+        <TabItem x:Name="Calculation_Tab" Header="Calculation" GotFocus="Calculation_Tab_GotFocus">
+            <Grid x:Name="Calculation_Grid">
+                <Button x:Name="Calculate_Button" Content="Расчитать" HorizontalAlignment="Left" Height="71" Margin="510,359,0,0" VerticalAlignment="Top" Width="496" Click="Button_Click"/>
+                <Label x:Name="OutputData_Label" Content="" HorizontalAlignment="Left" Height="202" Margin="510,157,0,0" VerticalAlignment="Top" Width="496" Background="#FFCBC6C6" FontSize="24"/>
+                <GroupBox x:Name="Data_GroupBox" Header="Данные" HorizontalAlignment="Left" Height="700" Margin="20,10,0,0" VerticalAlignment="Top" Width="469">
+                    <Grid x:Name="Calculation_Grid1" HorizontalAlignment="Left" Height="690" VerticalAlignment="Top" Width="459" Margin="0,0,-2,-12">
+                        <TextBox x:Name="R2_TextBox" HorizontalAlignment="Left" Margin="215,163,0,0" VerticalAlignment="Top" Style="{StaticResource TBGreyTheme}"/>
+                        <Label x:Name="firstRadius_Label" Content="меньший радиус" HorizontalAlignment="Left" Margin="0,163,0,0" VerticalAlignment="Top" Style="{StaticResource LabelGreyTheme}"/>
+                        <Label x:Name="secondRadius_Label" Content="больший радиус" HorizontalAlignment="Left" Margin="0,309,0,0" VerticalAlignment="Top" Style="{StaticResource LabelGreyTheme}"/>
+                        <TextBox x:Name="R1_TextBox" HorizontalAlignment="Left" Margin="215,309,0,0" VerticalAlignment="Top" Style="{StaticResource TBGreyTheme}"/>
+                        <Label x:Name="firstRadius_Label_Copy" Content="радиус полости" HorizontalAlignment="Left" Margin="0,447,0,0" VerticalAlignment="Top" Style="{StaticResource LabelGreyTheme}"/>
+                        <TextBox x:Name="R3_TextBox" HorizontalAlignment="Left" Margin="214,447,0,0" VerticalAlignment="Top" Style="{StaticResource TBGreyTheme}"/>
+                        <Label x:Name="firstRadius_Label_Copy1" Content="общая длина" HorizontalAlignment="Left" Margin="0,585,0,0" VerticalAlignment="Top" Style="{StaticResource LabelGreyTheme}"/>
+                        <TextBox x:Name="Height_TextBox" HorizontalAlignment="Left"  Margin="215,585,0,0" VerticalAlignment="Top" Style="{StaticResource TBGreyTheme}"/>
+                        <Label x:Name="Density_Label" Content="Плотность" HorizontalAlignment="Left" Margin="0,13,0,0" VerticalAlignment="Top" Style="{StaticResource LabelGreyTheme}"/>
+                        <TextBox x:Name="Density_TextBox" HorizontalAlignment="Left" Margin="215,13,0,0" VerticalAlignment="Top" Style="{StaticResource TBGreyTheme}"/>
+                    </Grid>
+                </GroupBox>
+
+            </Grid>
+        </TabItem>
+    </TabControl>
+</Window>
