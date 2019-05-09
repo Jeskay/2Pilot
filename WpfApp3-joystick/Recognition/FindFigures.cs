@@ -25,6 +25,7 @@ namespace WpfApp3_joystick
         public BitmapSource FindFigures(Mat image)
         {
             Mat binImage = Binarization(image);
+            //Mat binImage = Binarization(AreaExtracting(image));
             VectorOfVectorOfPoint findfigures = Finding_Contours(binImage);
             Circles     = 0;
             Triangles   = 0;
@@ -71,6 +72,20 @@ namespace WpfApp3_joystick
             CvInvoke.Threshold(bin1Mat, bin1Mat, 0, 255, ThresholdType.Otsu);
 
             return bin1Mat;
+        }
+        public Mat AreaExtracting(Mat inputimage)
+        {
+            Mat binimage = new Mat();
+            inputimage.CopyTo(binimage);
+            CvInvoke.Threshold(binMat, bin1Mat, 100, 255, ThresholdType.Binary);
+            VectorOfVectorOfPoint contours = Finding_Contours(binimage);
+            VectorOfPoint maxcontour = new VectorOfPoint();
+            for (int i = 0; i < contours.Size; i++)
+                if (contours[i].Size >= maxcontour.Size) maxcontour = contours[i];
+            
+            if (maxcontour.Size > 750) inputimage = new Mat(inputimage, CvInvoke.BoundingRectangle(maxcontour));
+
+            return inputimage;
         }
         public VectorOfVectorOfPoint Finding_Contours(Mat source)
         {

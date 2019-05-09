@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="SelectedImage" Height="450" Width="800" Loaded="Window_Loaded" Closed="SelectedImage_Window_Closed">
     <Grid x:Name="MainGrid">
-        <Grid x:Name="ImageGrid" Margin="0,0,214,0">
-            <Image x:Name="Selected_Image" HorizontalAlignment="Left" VerticalAlignment="Top" MouseMove="Selected_Image_MouseMove" MouseDown="Selected_Image_MouseDown" MouseUp="Selected_Image_MouseUp"/>
+        <Grid x:Name="ImageGrid" MouseMove="Selected_Image_MouseMove" Margin="0,0,214,0" MouseRightButtonDown="ImageGrid_MouseRightButtonDown" MouseRightButtonUp="ImageGrid_MouseRightButtonUp" MouseLeftButtonDown="ImageGrid_MouseLeftButtonDown" MouseLeftButtonUp="ImageGrid_MouseLeftButtonUp">
+            <Image x:Name="Selected_Image" HorizontalAlignment="Left" VerticalAlignment="Top"   />
         </Grid>
         <GroupBox x:Name="GroupBox_Ruler"  Header="Ruler" HorizontalAlignment="Right" Width="214" Height="126" VerticalAlignment="Bottom">
             <Grid x:Name="GroupBoxRuler_Grid" Margin="0,0,-2,-3" HorizontalAlignment="Right" Width="204" Height="111" VerticalAlignment="Bottom">

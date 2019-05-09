@@ -20,10 +20,10 @@
             <Setter Property="FontSize" Value="20"/>
         </Style>
     </Window.Resources>
-    <TabControl x:Name="Programs_TabControl" HorizontalAlignment="Right" Height="748" Margin="0,0,2,-1" VerticalAlignment="Top" Width="1070">
+    <TabControl x:Name="Programs_TabControl" Margin="2,1,1.6,0" HorizontalAlignment="Right" VerticalAlignment="Bottom">
         <TabItem x:Name="Ruler_Tab" Header="Ruler" GotFocus="Ruler_Tab_GotFocus">
-            <Grid x:Name="RulerTab_Grid" Background="#FFE5E5E5">
-                <Grid x:Name="myGrid" Margin="-6,0,199,0" HorizontalAlignment="Right" Width="871" Height="675" VerticalAlignment="Bottom" Panel.ZIndex="2">
+            <Grid x:Name="RulerTab_Grid" Background="#FFE5E5E5" HorizontalAlignment="Left" Margin="0,0,-0.2,0" Width="1065" Height="720" VerticalAlignment="Top">
+                <Grid x:Name="myGrid" Margin="-3,45,196.8,0" Panel.ZIndex="2">
                     <Image x:Name="ImageWebcam1" HorizontalAlignment="Left" MaxWidth="847" VerticalAlignment="Top" Grid.ColumnSpan="3" Panel.ZIndex="3"/>
                 </Grid>
                 <MediaElement x:Name="ME_test" Grid.Column="2" HorizontalAlignment="Left" Height="368" Margin="57,337,0,0" VerticalAlignment="Top" Width="492" LoadedBehavior="Manual" Source="Video/Putin.mp4" Volume="2" Visibility="Collapsed" Panel.ZIndex="4"/>
@@ -73,12 +73,12 @@
                 <GroupBox x:Name="Data_GroupBox" Header="Данные" HorizontalAlignment="Left" Height="700" Margin="20,10,0,0" VerticalAlignment="Top" Width="469">
                     <Grid x:Name="Calculation_Grid1" HorizontalAlignment="Left" Height="690" VerticalAlignment="Top" Width="459" Margin="0,0,-2,-12">
                         <TextBox x:Name="R2_TextBox" HorizontalAlignment="Left" Margin="215,163,0,0" VerticalAlignment="Top" Style="{StaticResource TBGreyTheme}"/>
-                        <Label x:Name="firstRadius_Label" Content="меньший радиус" HorizontalAlignment="Left" Margin="0,163,0,0" VerticalAlignment="Top" Style="{StaticResource LabelGreyTheme}"/>
-                        <Label x:Name="secondRadius_Label" Content="больший радиус" HorizontalAlignment="Left" Margin="0,309,0,0" VerticalAlignment="Top" Style="{StaticResource LabelGreyTheme}"/>
+                        <Label x:Name="firstRadius_Label" Content="Меньший радиус" HorizontalAlignment="Left" Margin="0,163,0,0" VerticalAlignment="Top" Style="{StaticResource LabelGreyTheme}"/>
+                        <Label x:Name="secondRadius_Label" Content="Больший радиус" HorizontalAlignment="Left" Margin="0,309,0,0" VerticalAlignment="Top" Style="{StaticResource LabelGreyTheme}"/>
                         <TextBox x:Name="R1_TextBox" HorizontalAlignment="Left" Margin="215,309,0,0" VerticalAlignment="Top" Style="{StaticResource TBGreyTheme}"/>
-                        <Label x:Name="firstRadius_Label_Copy" Content="радиус полости" HorizontalAlignment="Left" Margin="0,447,0,0" VerticalAlignment="Top" Style="{StaticResource LabelGreyTheme}"/>
+                        <Label x:Name="firstRadius_Label_Copy" Content="Радиус полости" HorizontalAlignment="Left" Margin="0,447,0,0" VerticalAlignment="Top" Style="{StaticResource LabelGreyTheme}"/>
                         <TextBox x:Name="R3_TextBox" HorizontalAlignment="Left" Margin="214,447,0,0" VerticalAlignment="Top" Style="{StaticResource TBGreyTheme}"/>
-                        <Label x:Name="firstRadius_Label_Copy1" Content="общая длина" HorizontalAlignment="Left" Margin="0,585,0,0" VerticalAlignment="Top" Style="{StaticResource LabelGreyTheme}"/>
+                        <Label x:Name="firstRadius_Label_Copy1" Content="Общая длина" HorizontalAlignment="Left" Margin="0,585,0,0" VerticalAlignment="Top" Style="{StaticResource LabelGreyTheme}"/>
                         <TextBox x:Name="Height_TextBox" HorizontalAlignment="Left"  Margin="215,585,0,0" VerticalAlignment="Top" Style="{StaticResource TBGreyTheme}"/>
                         <Label x:Name="Density_Label" Content="Плотность" HorizontalAlignment="Left" Margin="0,13,0,0" VerticalAlignment="Top" Style="{StaticResource LabelGreyTheme}"/>
                         <TextBox x:Name="Density_TextBox" HorizontalAlignment="Left" Margin="215,13,0,0" VerticalAlignment="Top" Style="{StaticResource TBGreyTheme}"/>
