@@ -64,6 +64,8 @@
                     <RadioButton x:Name="RecognitionFirstCamera_RB" Content="Camera 1" Height="50" Width="245" GroupName="RecognitionCameraSelection" Checked="RecognitionFirstCamera_RB_Checked"/>
                     <RadioButton x:Name="RecognitionSecondCamera_RB" Content="Camera 2" Height="50" Width="245" GroupName="RecognitionCameraSelection" Checked="RecognitionSecondCamera_RB_Checked"/>
                 </ComboBox>
+                <Slider x:Name="Bin_SliderMax" HorizontalAlignment="Left" Height="174" Margin="812,31,0,0" VerticalAlignment="Top" Width="30" Orientation="Vertical" Maximum="255"/>
+                <Slider x:Name="Bin_SliderMin" HorizontalAlignment="Left" Height="174" Margin="812,210,0,0" VerticalAlignment="Top" Width="30" Orientation="Vertical" Maximum="255"/>
             </Grid>
         </TabItem>
         <TabItem x:Name="Calculation_Tab" Header="Calculation" GotFocus="Calculation_Tab_GotFocus">

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
+using System.Drawing;
 using Emgu.CV;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
@@ -24,8 +25,8 @@ namespace WpfApp3_joystick
 
         public BitmapSource FindFigures(Mat image)
         {
+            //Rectangle area = AreaExtracting(image);
             Mat binImage = Binarization(image);
-            //Mat binImage = Binarization(AreaExtracting(image));
             VectorOfVectorOfPoint findfigures = Finding_Contours(binImage);
             Circles     = 0;
             Triangles   = 0;
@@ -33,8 +34,9 @@ namespace WpfApp3_joystick
             Lines       = 0;
             for (int i = 0; i < findfigures.Size; i++)
             {
-                if (CvInvoke.ContourArea(findfigures[i]) > 10)
+                if (CvInvoke.ContourArea(findfigures[i]) > 20)
                 {
+                    
                     if (Is_Circle(findfigures[i]))
                     {
                         CvInvoke.DrawContours(image, findfigures, i, new MCvScalar(0, 0, 255), 3);
@@ -67,25 +69,25 @@ namespace WpfApp3_joystick
             /// конвертация изображения в серое
             CvInvoke.CvtColor(source, binMat, ColorConversion.Bgr2Gray);
             /// бинаризация черно-белой картинки
-            CvInvoke.Threshold(binMat, bin1Mat, 100, 255, ThresholdType.Binary);
+            CvInvoke.Threshold(binMat, bin1Mat, 100, 200, ThresholdType.Binary);
             CvInvoke.Threshold(bin1Mat, bin1Mat, 25, 255, ThresholdType.BinaryInv);
             CvInvoke.Threshold(bin1Mat, bin1Mat, 0, 255, ThresholdType.Otsu);
-
+            CvInvoke.Imshow("BIN", bin1Mat);
             return bin1Mat;
         }
-        public Mat AreaExtracting(Mat inputimage)
+        public Rectangle  AreaExtracting(Mat inputimage)
         {
+            
             Mat binimage = new Mat();
             inputimage.CopyTo(binimage);
-            CvInvoke.Threshold(binMat, bin1Mat, 100, 255, ThresholdType.Binary);
+            CvInvoke.Threshold(binMat, bin1Mat, 200, 255, ThresholdType.Binary);
             VectorOfVectorOfPoint contours = Finding_Contours(binimage);
             VectorOfPoint maxcontour = new VectorOfPoint();
             for (int i = 0; i < contours.Size; i++)
                 if (contours[i].Size >= maxcontour.Size) maxcontour = contours[i];
-            
-            if (maxcontour.Size > 750) inputimage = new Mat(inputimage, CvInvoke.BoundingRectangle(maxcontour));
 
-            return inputimage;
+            if (maxcontour.Size > 600) return CvInvoke.BoundingRectangle(maxcontour);
+            else return new Rectangle(0, 0, inputimage.Width, inputimage.Height);
         }
         public VectorOfVectorOfPoint Finding_Contours(Mat source)
         {
@@ -97,6 +99,15 @@ namespace WpfApp3_joystick
             CvInvoke.DrawContours(bin1Mat, contours, -1, new MCvScalar(100, 0, 0), 4);
 
             return contours;
+        }
+        public bool Inrectangle(Rectangle rect, VectorOfPoint hull)
+        {
+            Rectangle h = CvInvoke.BoundingRectangle(hull);
+            if (h.X < rect.X) return false;
+            if (h.Y < rect.Y) return false;
+            if (rect.Right < h.X) return false;
+            if (rect.Top < h.Y) return false;
+            return true;
         }
         public bool Is_Rectangle(VectorOfPoint hull)
         {
