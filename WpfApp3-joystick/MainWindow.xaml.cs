@@ -167,7 +167,9 @@ namespace WpfApp3_joystick
             double R1 = Convert.ToDouble(R1_TextBox.Text);
             double R2 = Convert.ToDouble(R2_TextBox.Text);
             double R3 = Convert.ToDouble(R3_TextBox.Text);
-            double V = Math.PI * Convert.ToDouble(Height_TextBox.Text) * (R1 * R1 + R1 * R2 + R2 * R2) / 3.0;
+            double L = Convert.ToDouble(Height_TextBox.Text);
+            double V = Math.PI * L * (R1 * R1 + R1 * R2 + R2 * R2) / 3.0;
+            V = V - Math.PI * R3 * R3 * L;
             double M = V * Density;
             OutputData_Label.Content = "V= " + V + '\n' + "M= " + M;
         }
