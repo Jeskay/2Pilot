@@ -72,7 +72,7 @@ namespace WpfApp3_joystick
             CvInvoke.Threshold(binMat, bin1Mat, 100, 200, ThresholdType.Binary);
             CvInvoke.Threshold(bin1Mat, bin1Mat, 25, 255, ThresholdType.BinaryInv);
             CvInvoke.Threshold(bin1Mat, bin1Mat, 0, 255, ThresholdType.Otsu);
-            CvInvoke.Imshow("BIN", bin1Mat);
+            //CvInvoke.Imshow("BIN", bin1Mat);
             return bin1Mat;
         }
         public Rectangle  AreaExtracting(Mat inputimage)

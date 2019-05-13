@@ -163,7 +163,13 @@ namespace WpfApp3_joystick
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            double Density = Convert.ToDouble(Density_TextBox.Text);
+            const double Iron = 7.87;
+            const double Bronze = 8.03;
+            double Density = 0;
+            if (Density_CB.SelectedItem == AF_CBItem) Density = Bronze;
+            else if (Density_CB.SelectedItem == BF_IC_CBItem) Density = Iron;
+            else if (Density_CB.SelectedItem == FPF_CBItem) Density = Iron;
+            else if (Density_CB.SelectedItem == TF_JRA_CBItem) Density = Iron;
             double R1 = Convert.ToDouble(R1_TextBox.Text);
             double R2 = Convert.ToDouble(R2_TextBox.Text);
             double R3 = Convert.ToDouble(R3_TextBox.Text);

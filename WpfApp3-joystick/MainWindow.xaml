@@ -82,8 +82,12 @@
                         <TextBox x:Name="R3_TextBox" HorizontalAlignment="Left" Margin="214,447,0,0" VerticalAlignment="Top" Style="{StaticResource TBGreyTheme}"/>
                         <Label x:Name="firstRadius_Label_Copy1" Content="Общая длина" HorizontalAlignment="Left" Margin="0,585,0,0" VerticalAlignment="Top" Style="{StaticResource LabelGreyTheme}"/>
                         <TextBox x:Name="Height_TextBox" HorizontalAlignment="Left"  Margin="215,585,0,0" VerticalAlignment="Top" Style="{StaticResource TBGreyTheme}"/>
-                        <Label x:Name="Density_Label" Content="Плотность" HorizontalAlignment="Left" Margin="0,13,0,0" VerticalAlignment="Top" Style="{StaticResource LabelGreyTheme}"/>
-                        <TextBox x:Name="Density_TextBox" HorizontalAlignment="Left" Margin="215,13,0,0" VerticalAlignment="Top" Style="{StaticResource TBGreyTheme}"/>
+                        <ComboBox x:Name="Density_CB" HorizontalAlignment="Left" Height="55" Margin="10,27,0,0" VerticalAlignment="Top" Width="200" FontSize="20">
+                            <ComboBoxItem x:Name="AF_CBItem" Content="AF" IsSelected="True"/>
+                            <ComboBoxItem x:Name="BF_IC_CBItem" Content="BF IC"/>
+                            <ComboBoxItem x:Name="FPF_CBItem" Content="FPF"/>
+                            <ComboBoxItem x:Name="TF_JRA_CBItem" Content="TF - JRA"/>
+                        </ComboBox>
                     </Grid>
                 </GroupBox>
 
