@@ -22,6 +22,11 @@ namespace WpfApp3_joystick
             get { return mainModel.RecognitionCamera; }
             set { mainModel.RecognitionCamera = value; }
         }
+        public VideoCapture MicroROVCamera
+        {
+            get { return mainModel.MicroROVCamera; }
+            set { mainModel.MicroROVCamera = value; }
+        }
 
         public MainView(MainModel mainModel)
         {

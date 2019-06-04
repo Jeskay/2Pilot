@@ -12,6 +12,7 @@ namespace WpfApp3_joystick
     {
         private VideoCapture rulerCamera;
         private VideoCapture recognitionCamera;
+        private VideoCapture microROVCamera;
 
         public VideoCapture RulerCamera
         {
@@ -22,6 +23,11 @@ namespace WpfApp3_joystick
         {
             get { return recognitionCamera; }
             set { recognitionCamera = value; }
+        }
+        public VideoCapture MicroROVCamera
+        {
+            get { return microROVCamera; }
+            set { microROVCamera = value; }
         }
     }
 }

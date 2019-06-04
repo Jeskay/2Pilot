@@ -41,11 +41,14 @@ namespace WpfApp3_joystick
         private VideoCapture Firstcapture = new VideoCapture(0);
 
         DispatcherTimer VideoTimer = new DispatcherTimer();
+        DispatcherTimer UARTTimer = new DispatcherTimer();
         private Recognition Recognition = new Recognition();
+        private UARTConnection UARTconnection = new UARTConnection();
+        private UARTModelView UARTmv = new UARTModelView(new UARTModel());
         private FiguresView figuresView = new FiguresView(new FiguresModel());
         private MainView mainView = new MainView(new MainModel());
 
-        private bool FirstWindowaCtivated = true;
+        private int ActivatedWindow = 1;
 
         public MainWindow()
         {
@@ -63,6 +66,7 @@ namespace WpfApp3_joystick
             {
                 RulerFirstCamera_RB.Visibility = Visibility.Collapsed;
                 RecognitionFirstCamera_RB.Visibility = Visibility.Collapsed;
+                MicroROVFirstCamera_RB.Visibility = Visibility.Collapsed;
             }
             try
             {
@@ -74,13 +78,17 @@ namespace WpfApp3_joystick
                 Console.WriteLine(ex);
                 RulerFirstCamera_RB.Visibility = Visibility.Collapsed;
                 RecognitionFirstCamera_RB.Visibility = Visibility.Collapsed;
+                MicroROVFirstCamera_RB.Visibility = Visibility.Collapsed;
             }
             if (!Secondcapture.IsOpened)
             {
                 RulerSecondCamera_RB.Visibility = Visibility.Collapsed;
                 RecognitionSecondCamera_RB.Visibility = Visibility.Collapsed;
+                MicroROVSecondCamera_RB.Visibility = Visibility.Collapsed;
             }
             VideoTimer.Tick += new EventHandler(VTimer_Tick);
+            UARTTimer.Tick += new EventHandler(UARTTimer_Tick);
+            UARTTimer.Interval = new TimeSpan(0, 0, 0, 0, 100);
             VideoTimer.Interval = new TimeSpan(0, 0, 0, 0, 10);
             VideoTimer.Start();
 
@@ -138,27 +146,35 @@ namespace WpfApp3_joystick
 
         private void VTimer_Tick(object sender, EventArgs e)
         {
-            Mat Rulerimage = mainView.RulerCamera.QueryFrame();
-            Mat Recognitionimage = mainView.RecognitionCamera.QueryFrame();
-            if (FirstWindowaCtivated) ImageWebcam1.Source = BitmapSourceConvert.ToBitmapSource(Rulerimage.ToImage<Bgr, Byte>());
-            else
+            switch (ActivatedWindow)
             {
-                Image1.Source = Recognition.FindFigures(Recognitionimage);
-                figuresView.Circles = Recognition.Circles;
-                figuresView.Lines = Recognition.Lines;
-                figuresView.Triangles = Recognition.Triangles;
-                figuresView.Squares = Recognition.Squares;
+                case 1:
+                    ImageWebcam1.Source = BitmapSourceConvert.ToBitmapSource(mainView.RulerCamera.QueryFrame().ToImage<Bgr, Byte>());
+                    break;
+                case 2:
+                    Image1.Source = Recognition.FindFigures(mainView.RecognitionCamera.QueryFrame());
+                    break;
+                case 3:
+                    MicroROV_Image.Source = BitmapSourceConvert.ToBitmapSource(mainView.MicroROVCamera.QueryFrame().ToImage<Bgr, Byte>());
+                    break;
             }
+            figuresView.Circles = Recognition.Circles;
+            figuresView.Lines = Recognition.Lines;
+            figuresView.Triangles = Recognition.Triangles;
+            figuresView.Squares = Recognition.Squares;
         }
-
+        private void UARTTimer_Tick(object sender, EventArgs e)
+        {
+            UARTconnection.UARTWrite(UARTmv.MotorPower * UARTmv.Direction, UARTmv.LightBrightness);
+        }
         private void Recognition_Tab_GotFocus(object sender, RoutedEventArgs e)
         {
-            FirstWindowaCtivated = false;
+         
         }
 
         private void Ruler_Tab_GotFocus(object sender, RoutedEventArgs e)
         {
-            FirstWindowaCtivated = true;
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -213,6 +229,115 @@ namespace WpfApp3_joystick
         private void RulerSecondCamera_RB_Checked(object sender, RoutedEventArgs e)
         {
             mainView.RulerCamera = Secondcapture;
+        }
+
+        private void MicroROVStandartCamera_RB_Checked(object sender, RoutedEventArgs e)
+        {
+            mainView.MicroROVCamera = Defaultcapture;
+        }
+
+        private void MicroROVFirstCamera_RB_Checked(object sender, RoutedEventArgs e)
+        {
+            mainView.MicroROVCamera = Firstcapture;
+        }
+
+        private void MicroROVSecondCamera_RB_Checked(object sender, RoutedEventArgs e)
+        {
+            mainView.MicroROVCamera = Secondcapture;
+        }
+
+        private void Programs_TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (Ruler_Tab.IsSelected)
+                ActivatedWindow = 1;
+            else if (Recognition_Tab.IsSelected)
+                ActivatedWindow = 2;
+            else if (MicroRov_Tab.IsSelected)
+                ActivatedWindow = 3;
+        }
+
+        private void _115200BaudRate_RB_Checked(object sender, RoutedEventArgs e)
+        {
+            UARTConnection.BaudRate = 115200;
+        }
+
+        private void _9600BaudRate_RB_Checked(object sender, RoutedEventArgs e)
+        {
+            UARTConnection.BaudRate = 9600;
+        }
+
+        private void COMPort_TB_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            int port;
+            TextBox textbox = (TextBox)sender;
+            if (Int32.TryParse(textbox.Text, out port))
+            {
+                UARTConnection.COMport = "COM" + textbox.Text;
+            }
+            else
+            {
+                Console.WriteLine("Это не НОРМАЛЬНЫЙ ввод!!");
+            }
+        }
+
+        private void StartUART_Button_Click(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Controls.Button button = (System.Windows.Controls.Button)sender;
+            if (UARTTimer.IsEnabled)
+            {
+                UARTTimer.Stop();
+                button.Content = "Start";
+            }
+            else
+            {
+                UARTconnection.InitializePort();
+                UARTTimer.Start();
+                button.Content = "Stop";
+            }
+        }
+
+        private void Main_Grid1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.W)
+            {
+                UARTmv.Direction = 1;
+            }
+            else if (e.Key == System.Windows.Input.Key.S)
+            {
+                UARTmv.Direction = -1;
+            }
+            else
+            {
+                UARTmv.Direction = 0;
+            }
+        }
+
+        private void Main_Grid1_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.W)
+            {
+                UARTmv.Direction = 0;
+            }
+            if (e.Key == System.Windows.Input.Key.S)
+            {
+                UARTmv.Direction = 0;
+            }
+            if (e.Key == System.Windows.Input.Key.Q)
+            {
+                if (UARTmv.MotorPower <= 100) UARTmv.MotorPower += 10;
+            }
+            else if (e.Key == System.Windows.Input.Key.E)
+            {
+                if (UARTmv.MotorPower >= -100) UARTmv.MotorPower -= 10;
+            }
+            if (e.Key == System.Windows.Input.Key.R)
+            {
+                UARTmv.LightBrightness = 100;
+            }
+            else if (e.Key == System.Windows.Input.Key.F)
+            {
+                UARTmv.LightBrightness = 0;
+            }
         }
     }
 }

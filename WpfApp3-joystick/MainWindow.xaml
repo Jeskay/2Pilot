@@ -20,7 +20,7 @@
             <Setter Property="FontSize" Value="20"/>
         </Style>
     </Window.Resources>
-    <TabControl x:Name="Programs_TabControl" Margin="2,1,1.6,0" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+    <TabControl x:Name="Programs_TabControl" Margin="2,1,1.6,0" HorizontalAlignment="Right" VerticalAlignment="Bottom" SelectionChanged="Programs_TabControl_SelectionChanged">
         <TabItem x:Name="Ruler_Tab" Header="Ruler" GotFocus="Ruler_Tab_GotFocus">
             <Grid x:Name="RulerTab_Grid" Background="#FFE5E5E5" HorizontalAlignment="Left" Margin="0,0,-0.2,0" Width="1065" Height="720" VerticalAlignment="Top">
                 <Grid x:Name="myGrid" Margin="-3,45,196.8,0" Panel.ZIndex="2">
@@ -37,6 +37,31 @@
                     <RadioButton x:Name="RulerFirstCamera_RB" Content="Camera 1" Height="50" Width="245" GroupName="RulerCameraSelection" Checked="RulerFirstCamera_RB_Checked"/>
                     <RadioButton x:Name="RulerSecondCamera_RB" Content="Camera 2" Height="50" Width="245" GroupName="RulerCameraSelection" Checked="RulerSecondCamera_RB_Checked"/>
                 </ComboBox>
+            </Grid>
+        </TabItem>
+        <TabItem x:Name="MicroRov_Tab" Header="MicroRov">
+            <Grid x:Name="Main_Grid1" HorizontalAlignment="Left" Margin="0,0,-0.2,0" Width="1065" Height="720" VerticalAlignment="Top" KeyDown="Main_Grid1_KeyDown" KeyUp="Main_Grid1_KeyUp">
+                <Grid x:Name="MicroRov_Grid" HorizontalAlignment="Left" Height="567" Margin="0,46,0,0" VerticalAlignment="Top" Width="861">
+                    <Image x:Name="MicroROV_Image" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                </Grid>
+                <ComboBox x:Name="MicroROVCamera_ComboBox" HorizontalAlignment="Left" Height="46" Margin="0,0,0,674" VerticalAlignment="Bottom" Width="252">
+                    <RadioButton x:Name="MicroROVStandartCamera_RB" Content="Default Camera" Height="50" Width="245" GroupName="RulerCameraSelection" Checked="MicroROVStandartCamera_RB_Checked" IsChecked="True"/>
+                    <RadioButton x:Name="MicroROVFirstCamera_RB" Content="Camera 1" Height="50" Width="245" GroupName="RulerCameraSelection" Checked="MicroROVFirstCamera_RB_Checked"/>
+                    <RadioButton x:Name="MicroROVSecondCamera_RB" Content="Camera 2" Height="50" Width="245" GroupName="RulerCameraSelection" Checked="MicroROVSecondCamera_RB_Checked"/>
+                </ComboBox>
+                <RadioButton x:Name="_9600BaudRate_RB" Content="9600 Baud rate" HorizontalAlignment="Left" Height="38" Margin="899,46,0,0" VerticalAlignment="Top" Width="156" GroupName="BaudRate" IsChecked="True" Checked="_9600BaudRate_RB_Checked"/>
+                <RadioButton x:Name="_115200BaudRate_RB" Content="115200 BaudRate" HorizontalAlignment="Left" Height="38" Margin="899,84,0,0" VerticalAlignment="Top" Width="156" GroupName="BaudRate" Checked="_115200BaudRate_RB_Checked"/>
+                <TextBox x:Name="COMPort_TB" HorizontalAlignment="Left" Height="49" Margin="899,165,0,0" TextWrapping="Wrap" Text="20" VerticalAlignment="Top" Width="156" TextChanged="COMPort_TB_TextChanged"/>
+                <Label x:Name="COMPort_Label" Content="COMPort:" HorizontalAlignment="Left" Height="43" Margin="899,122,0,0" VerticalAlignment="Top" Width="156"/>
+                <Button x:Name="StartUART_Button" Content="Start" HorizontalAlignment="Left" Height="59" Margin="899,219,0,0" VerticalAlignment="Top" Width="156" Click="StartUART_Button_Click"/>
+                <Label x:Name="Direction_Label" Content="Direction" HorizontalAlignment="Left" Height="50" Margin="0,611,0,0" VerticalAlignment="Top" Width="113"/>
+                <Label x:Name="MotorPower_Label" Content="MotorPower" HorizontalAlignment="Left" Height="50" Margin="118,611,0,0" VerticalAlignment="Top" Width="113"/>
+                <Label x:Name="LightBrightness_Label" Content="LightBrightness" HorizontalAlignment="Left" Height="50" Margin="231,611,0,0" VerticalAlignment="Top" Width="113"/>
+                <Label x:Name="DirectionData_label" Content="{Binding Path=Direction, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="44" Margin="0,661,0,0" VerticalAlignment="Top" Width="113"/>
+                <Label x:Name="MotorPowerData_label" Content="{Binding Path=MotorPower, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="44" Margin="113,661,0,0" VerticalAlignment="Top" Width="118"/>
+                <Label x:Name="LightBrighnessData_label" Content="{Binding Path=LightBrighness, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="44" Margin="231,661,0,0" VerticalAlignment="Top" Width="113"/>
+                <Label x:Name="SendingData_Label" Content="{Binding Path=SendingData, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="275" Margin="861,445,0,0" VerticalAlignment="Top" Width="194"/>
+
             </Grid>
         </TabItem>
         <TabItem x:Name="Recognition_Tab" Header="Recognition" GotFocus="Recognition_Tab_GotFocus">
