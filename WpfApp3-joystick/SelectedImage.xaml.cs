@@ -99,7 +99,7 @@ namespace WpfApp3_joystick
                 distance = 50;
             }
             k = Math.Sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)) / distance;
-            TextBox1.Text = "range = " + Math.Round((Math.Sqrt((x4 - x3) * (x4 - x3) + (y4 - y3) * (y4 - y3)) / k) * 100) / 100;//вывод результата
+            TextBox1.Text = "range = " + Math.Round((Math.Sqrt((x4 - x3) * (x4 - x3) + (y4 - y3) * (y4 - y3)) / k), 2);//вывод результата
 
         }
 
