@@ -55,6 +55,7 @@ namespace WpfApp3_joystick
             InitializeComponent();
             Firstcapture.FlipHorizontal = true;
             GoupBox_Grid.DataContext = figuresView;
+            Main_Grid1.DataContext = UARTmv;
         }
         private void MainWin_Loaded(object sender, RoutedEventArgs e)
         {
@@ -306,10 +307,6 @@ namespace WpfApp3_joystick
             {
                 UARTmv.Direction = -1;
             }
-            else
-            {
-                UARTmv.Direction = 0;
-            }
         }
 
         private void Main_Grid1_KeyUp(object sender, KeyEventArgs e)
@@ -324,17 +321,17 @@ namespace WpfApp3_joystick
             }
             if (e.Key == System.Windows.Input.Key.Q)
             {
-                if (UARTmv.MotorPower <= 100) UARTmv.MotorPower += 10;
+                if (UARTmv.MotorPower < 100) UARTmv.MotorPower += 10;
             }
-            else if (e.Key == System.Windows.Input.Key.E)
+            if (e.Key == System.Windows.Input.Key.E)
             {
-                if (UARTmv.MotorPower >= -100) UARTmv.MotorPower -= 10;
+                if (UARTmv.MotorPower > 0) UARTmv.MotorPower -= 10;
             }
             if (e.Key == System.Windows.Input.Key.R)
             {
                 UARTmv.LightBrightness = 100;
             }
-            else if (e.Key == System.Windows.Input.Key.F)
+            if (e.Key == System.Windows.Input.Key.F)
             {
                 UARTmv.LightBrightness = 0;
             }

@@ -117,6 +117,7 @@
     <Compile Include="Recognition\FiguresModel.cs" />
     <Compile Include="Recognition\FiguresView.cs" />
     <Compile Include="Recognition\FindFigures.cs" />
+    <Compile Include="Recognition\SelectionControl.cs" />
     <Compile Include="SelectedImage.xaml.cs">
       <DependentUpon>SelectedImage.xaml</DependentUpon>
     </Compile>

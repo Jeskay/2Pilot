@@ -13,7 +13,7 @@ namespace WpfApp3_joystick
         private VideoCapture rulerCamera;
         private VideoCapture recognitionCamera;
         private VideoCapture microROVCamera;
-
+        public int SelectedWindow = 1;
         public VideoCapture RulerCamera
         {
             get { return rulerCamera; }

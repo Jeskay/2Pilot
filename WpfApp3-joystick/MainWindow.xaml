@@ -41,7 +41,7 @@
         </TabItem>
         <TabItem x:Name="MicroRov_Tab" Header="MicroRov">
             <Grid x:Name="Main_Grid1" HorizontalAlignment="Left" Margin="0,0,-0.2,0" Width="1065" Height="720" VerticalAlignment="Top" KeyDown="Main_Grid1_KeyDown" KeyUp="Main_Grid1_KeyUp">
-                <Grid x:Name="MicroRov_Grid" HorizontalAlignment="Left" Height="567" Margin="0,46,0,0" VerticalAlignment="Top" Width="861">
+                <Grid x:Name="MicroRov_Grid" HorizontalAlignment="Left" Height="664" Margin="0,46,0,0" VerticalAlignment="Top" Width="861">
                     <Image x:Name="MicroROV_Image" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                 </Grid>
                 <ComboBox x:Name="MicroROVCamera_ComboBox" HorizontalAlignment="Left" Height="46" Margin="0,0,0,674" VerticalAlignment="Bottom" Width="252">
@@ -54,13 +54,13 @@
                 <TextBox x:Name="COMPort_TB" HorizontalAlignment="Left" Height="49" Margin="899,165,0,0" TextWrapping="Wrap" Text="20" VerticalAlignment="Top" Width="156" TextChanged="COMPort_TB_TextChanged"/>
                 <Label x:Name="COMPort_Label" Content="COMPort:" HorizontalAlignment="Left" Height="43" Margin="899,122,0,0" VerticalAlignment="Top" Width="156"/>
                 <Button x:Name="StartUART_Button" Content="Start" HorizontalAlignment="Left" Height="59" Margin="899,219,0,0" VerticalAlignment="Top" Width="156" Click="StartUART_Button_Click"/>
-                <Label x:Name="Direction_Label" Content="Direction" HorizontalAlignment="Left" Height="50" Margin="0,611,0,0" VerticalAlignment="Top" Width="113"/>
-                <Label x:Name="MotorPower_Label" Content="MotorPower" HorizontalAlignment="Left" Height="50" Margin="118,611,0,0" VerticalAlignment="Top" Width="113"/>
-                <Label x:Name="LightBrightness_Label" Content="LightBrightness" HorizontalAlignment="Left" Height="50" Margin="231,611,0,0" VerticalAlignment="Top" Width="113"/>
-                <Label x:Name="DirectionData_label" Content="{Binding Path=Direction, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="44" Margin="0,661,0,0" VerticalAlignment="Top" Width="113"/>
-                <Label x:Name="MotorPowerData_label" Content="{Binding Path=MotorPower, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="44" Margin="113,661,0,0" VerticalAlignment="Top" Width="118"/>
-                <Label x:Name="LightBrighnessData_label" Content="{Binding Path=LightBrighness, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="44" Margin="231,661,0,0" VerticalAlignment="Top" Width="113"/>
-                <Label x:Name="SendingData_Label" Content="{Binding Path=SendingData, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="275" Margin="861,445,0,0" VerticalAlignment="Top" Width="194"/>
+                <Label x:Name="Direction_Label" Content="Direction" HorizontalAlignment="Left" Height="39" Margin="871,432,0,0" VerticalAlignment="Top" Width="70"/>
+                <Label x:Name="MotorPower_Label" Content="MotorPower" HorizontalAlignment="Left" Height="44" Margin="861,471,0,0" VerticalAlignment="Top" Width="85"/>
+                <Label x:Name="LightBrightness_Label" Content="LightBrightness" HorizontalAlignment="Left" Height="39" Margin="861,515,0,0" VerticalAlignment="Top" Width="85"/>
+                <Label x:Name="DirectionData_label" Content="{Binding Path=Direction, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="39" Margin="946,432,0,0" VerticalAlignment="Top" Width="109"/>
+                <Label x:Name="MotorPowerData_label" Content="{Binding Path=MotorPower, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="44" Margin="951,471,0,0" VerticalAlignment="Top" Width="104"/>
+                <Label x:Name="LightBrighnessData_label" Content="{Binding Path=LightBrightness, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="39" Margin="946,515,0,0" VerticalAlignment="Top" Width="109"/>
+                <Label x:Name="SendingData_Label" Content="{Binding Path=SendingData, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="149" Margin="871,283,0,0" VerticalAlignment="Top" Width="194"/>
 
             </Grid>
         </TabItem>
