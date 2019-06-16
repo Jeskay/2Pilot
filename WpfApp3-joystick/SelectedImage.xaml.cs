@@ -30,7 +30,6 @@ namespace WpfApp3_joystick
         public Mat Source { get; set; }
         public Line myLine;
         public Line my2Line;
-        private System.Drawing.Rectangle rect = new System.Drawing.Rectangle();
         
         private void Selected_Image_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -49,7 +48,8 @@ namespace WpfApp3_joystick
             my2Line.X2 = x4;
             my2Line.Y2 = y4;
             k = Math.Sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)) / distance;
-            TextBox1.Text = "range = " + Math.Round((Math.Sqrt((x4 - x3) * (x4 - x3) + (y4 - y3) * (y4 - y3)) / k) * 100) / 100;//вывод результата
+            TextBox1.Text = Math.Round((Math.Sqrt((x4 - x3) * (x4 - x3) + (y4 - y3) * (y4 - y3)) / k), 2).ToString();//вывод результата
+            Radius_TB.Text = (Convert.ToDouble(TextBox1.Text) / 2).ToString();
         }
 
         private void Selected_Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -75,24 +75,51 @@ namespace WpfApp3_joystick
                 distance = 50;
             }
             k = Math.Sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)) / distance;
-            TextBox1.Text = "range = " + Math.Round((Math.Sqrt((x4 - x3) * (x4 - x3) + (y4 - y3) * (y4 - y3)) / k) * 100) / 100;//вывод результата
-
+            TextBox1.Text = Math.Round((Math.Sqrt((x4 - x3) * (x4 - x3) + (y4 - y3) * (y4 - y3)) / k), 2).ToString();//вывод результата
+            Radius_TB.Text = (Convert.ToDouble(TextBox1.Text) / 2).ToString();
         }
 
         private void Selected_Image_MouseWheel(object sender, MouseWheelEventArgs e)
         {
             var matrix = Selected_Image.RenderTransform.Value;
+            var matrix2 = my2Line.RenderTransform.Value;
 
             if (e.Delta > 0)
             {
                 matrix.ScaleAt(1.5, 1.5, e.GetPosition(this).X, e.GetPosition(this).Y);
+                matrix2.ScaleAt(1.5, 1.5, e.GetPosition(this).X, e.GetPosition(this).Y);
             }
             else
             {
                 matrix.ScaleAt(1.0 / 1.5, 1.0 / 1.5, e.GetPosition(this).X, e.GetPosition(this).Y);
+                matrix2.ScaleAt(1.0 / 1.5, 1.0 / 1.5, e.GetPosition(this).X, e.GetPosition(this).Y);
             }
 
             Selected_Image.RenderTransform = new MatrixTransform(matrix);
+        }
+
+        private void TextBox1_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                Radius_TB.Text = (Convert.ToDouble(TextBox1.Text) / 2).ToString();
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("некоррректный ввод");
+            }
+        }
+
+        private void SmallDiameter_TB_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox Tb = (TextBox)sender;
+            try
+            {
+                double number = Convert.ToDouble( Tb.Text);
+                
+            }
+            catch (FormatException)
+            { }
         }
 
         ///delete this\\\
@@ -102,12 +129,12 @@ namespace WpfApp3_joystick
             //инициализация линий
             myLine = new Line();
             myLine.StrokeThickness = 1;
-            MainGrid.Children.Add(myLine);
+            ImageGrid.Children.Add(myLine);
             my2Line = new Line();
             my2Line.StrokeThickness = 1;
             myLine.Stroke = System.Windows.Media.Brushes.Blue;
             my2Line.Stroke = System.Windows.Media.Brushes.Red;
-            MainGrid.Children.Add(my2Line);
+            ImageGrid.Children.Add(my2Line);
         }
 
         private void TextBox2_TextChanged(object sender, TextChangedEventArgs e)
@@ -121,14 +148,10 @@ namespace WpfApp3_joystick
                 distance = 1;
             }
             k = Math.Sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)) / distance;
-            TextBox1.Text = "range = " + Math.Round((Math.Sqrt((x4 - x3) * (x4 - x3) + (y4 - y3) * (y4 - y3)) / k), 2);//вывод результата
-
+            TextBox1.Text = Math.Round((Math.Sqrt((x4 - x3) * (x4 - x3) + (y4 - y3) * (y4 - y3)) / k), 2).ToString();//вывод результата
+            Radius_TB.Text = (Convert.ToDouble(TextBox1.Text) / 2).ToString();
         }
 
-        private void TextBox1_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
         public event EventHandler WindowClosed;
         private void SelectedImage_Window_Closed(object sender, EventArgs e)
         {
@@ -159,7 +182,8 @@ namespace WpfApp3_joystick
                 x2 = x;
                 y2 = y;
                 k = Math.Sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)) / distance;
-                TextBox1.Text = "range = " + Math.Round((Math.Sqrt((x4 - x3) * (x4 - x3) + (y4 - y3) * (y4 - y3)) / k) * 100) / 100;//вывод результата
+                TextBox1.Text = Math.Round((Math.Sqrt((x4 - x3) * (x4 - x3) + (y4 - y3) * (y4 - y3)) / k), 2).ToString();//вывод результата
+                Radius_TB.Text = (Convert.ToDouble(TextBox1.Text) / 2).ToString();
             }
             //конец второй линии
             if (e.RightButton == MouseButtonState.Pressed)
@@ -177,8 +201,8 @@ namespace WpfApp3_joystick
                     distance = 1;
                 }
                 k = Math.Sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)) / distance;
-                TextBox1.Text = "range = " + Math.Round((Math.Sqrt((x4 - x3) * (x4 - x3) + (y4 - y3) * (y4 - y3)) / k) * 100) / 100;//вывод результата
-
+                TextBox1.Text = Math.Round((Math.Sqrt((x4 - x3) * (x4 - x3) + (y4 - y3) * (y4 - y3)) / k), 2).ToString();//вывод результата
+                Radius_TB.Text = (Convert.ToDouble(TextBox1.Text) / 2).ToString();
             }
         }
     }

@@ -52,7 +52,6 @@ C:\Users\Валера\source\repos\WpfApp3-joystick-2c375ab88b607d435fe107c86fe8
 C:\Users\Валера\source\repos\WpfApp3-joystick-2c375ab88b607d435fe107c86fe8b69e0d954f0f\WpfApp3-joystick\bin\Release\tr\ZedGraph.resources.dll
 C:\Users\Валера\source\repos\WpfApp3-joystick-2c375ab88b607d435fe107c86fe8b69e0d954f0f\WpfApp3-joystick\bin\Release\zh-cn\ZedGraph.resources.dll
 C:\Users\Валера\source\repos\WpfApp3-joystick-2c375ab88b607d435fe107c86fe8b69e0d954f0f\WpfApp3-joystick\bin\Release\zh-tw\ZedGraph.resources.dll
-C:\Users\Валера\source\repos\WpfApp3-joystick-2c375ab88b607d435fe107c86fe8b69e0d954f0f\WpfApp3-joystick\obj\Release\WpfApp3-joystick.csprojAssemblyReference.cache
 C:\Users\Валера\source\repos\WpfApp3-joystick-2c375ab88b607d435fe107c86fe8b69e0d954f0f\WpfApp3-joystick\obj\Release\MainWindow.g.cs
 C:\Users\Валера\source\repos\WpfApp3-joystick-2c375ab88b607d435fe107c86fe8b69e0d954f0f\WpfApp3-joystick\obj\Release\SelectedImage.g.cs
 C:\Users\Валера\source\repos\WpfApp3-joystick-2c375ab88b607d435fe107c86fe8b69e0d954f0f\WpfApp3-joystick\obj\Release\App.g.cs

@@ -41,6 +41,7 @@ namespace WpfApp3_joystick
                     {
                         CvInvoke.DrawContours(image, findfigures, i, new MCvScalar(0, 0, 255), 3);
                         Circles++;
+                        
                     }
                     else if (Is_Rectangle(findfigures[i]))
                     {
@@ -111,41 +112,95 @@ namespace WpfApp3_joystick
         }
         public bool Is_Rectangle(VectorOfPoint hull)
         {
-            CvInvoke.ApproxPolyDP(hull, hull, 2, true);
-            if (hull.Size == 4)
+            Console.WriteLine(hull.Size);
+            if (hull.Size < 5) return false;
+               PointF[] points = CvInvoke.FitEllipse(hull).GetVertices();
+            double R1 = getR(points[0].X, points[0].Y, points[1].X, points[1].Y);
+            double R2 = getR(points[0].X, points[0].Y, points[2].X, points[2].Y);
+            double R3 = getR(points[0].X, points[0].Y, points[3].X, points[3].Y);
+            double maximum = Math.Max(Math.Max(R1, R2), R3);
+            double width, height;
+            if (R1 == maximum)
             {
-                System.Drawing.Rectangle r = CvInvoke.BoundingRectangle(hull);
-                double minr = Math.Min(r.Width, r.Height);
-                double maxr = Math.Max(r.Height, r.Width);
-                if (minr / maxr < 0.7)
-                {
-                    return true;
-                }
+                width = R2;
+                height = R3;
             }
-            return false;
+            else if(R2== maximum)
+            {
+                width = R1;
+                height = R3;
+            }
+            else
+            {
+                width = R1;
+                height = R2;
+            }
+            VectorOfPoint newhull = new VectorOfPoint();
+                CvInvoke.ApproxPolyDP(hull, newhull, 10, true);
+                if (newhull.Size != 4) return false;
+                double minr = Math.Min(width, height);
+                double maxr = Math.Max(height, width);
+            if (minr / maxr < 0.5)
+            {
+                return true;
+            }
+            else return false;
+            
         }
+        private double getR(double x1, double y1, double x2, double y2)
+        {
+            double x = Math.Abs(x1 - x2);
+            double y = Math.Abs(y1 - y2);
+            return Math.Sqrt(x * x + y * y);
+        }
+        
         public bool Is_Square(VectorOfPoint hull)
         {
-            CvInvoke.ApproxPolyDP(hull, hull, 10, true);
-            if (hull.Size == 4)
+            Console.WriteLine(hull.Size);
+            if (hull.Size < 5) return false;
+            PointF[] points = CvInvoke.FitEllipse(hull).GetVertices();
+            double R1 = getR(points[0].X, points[0].Y, points[1].X, points[1].Y);
+            double R2 = getR(points[0].X, points[0].Y, points[2].X, points[2].Y);
+            double R3 = getR(points[0].X, points[0].Y, points[3].X, points[3].Y);
+            double maximum = Math.Max(Math.Max(R1, R2), R3);
+            double width, height;
+            if (R1 == maximum)
             {
-                System.Drawing.Rectangle r = CvInvoke.BoundingRectangle(hull);
-                double minr = Math.Min(r.Width, r.Height);
-                double maxr = Math.Max(r.Height, r.Width);
-                if (minr / maxr > 0.4)
+                width = R2;
+                height = R3;
+            }
+            else if (R2 == maximum)
+            {
+                width = R1;
+                height = R3;
+            }
+            else
+            {
+                width = R1;
+                height = R2;
+            }
+
+            VectorOfPoint newhull = new VectorOfPoint();
+            CvInvoke.ApproxPolyDP(hull, newhull, 10, true);
+            if (newhull.Size != 4) return false;
+                double minr = Math.Min(width, height);
+                double maxr = Math.Max(height, width);
+                if (minr / maxr >= 0.5)
                 {
                     return true;
                 }
-            }
-            return false;
+                else return false;
         }
         public bool Is_Circle(VectorOfPoint hull)
         {
-            CvInvoke.ApproxPolyDP(hull, hull, 5, true);
-            if (hull.Size >= 5)
+            Console.WriteLine(hull.Size);
+
+            VectorOfPoint newhull = new VectorOfPoint();
+            CvInvoke.ApproxPolyDP(hull, newhull, 5, true);
+            if (newhull.Size >= 5)
             {
-                double area = CvInvoke.ContourArea(hull);
-                System.Drawing.Rectangle r = CvInvoke.BoundingRectangle(hull);
+                double area = CvInvoke.ContourArea(newhull);
+                System.Drawing.Rectangle r = CvInvoke.BoundingRectangle(newhull);
                 double radius = r.Width / 2;
                 if (Math.Abs(1.0 - ((double)r.Width / (double)r.Height)) <= 0.4 && Math.Abs(1.0 - (area / (Math.PI * Math.Pow(radius, 2.0)))) <= 0.4)
                 {
@@ -156,8 +211,11 @@ namespace WpfApp3_joystick
         }
         public bool Is_Triangle(VectorOfPoint hull)
         {
-            CvInvoke.ApproxPolyDP(hull, hull, 10, true);
-            if (hull.Size == 3) return true;
+            Console.WriteLine(hull.Size);
+
+            VectorOfPoint newhull = new VectorOfPoint();
+            CvInvoke.ApproxPolyDP(hull, newhull, 10, true);
+            if (newhull.Size == 3) return true;
             else return false;
         }
     }

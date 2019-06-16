@@ -70,15 +70,15 @@
                 <GroupBox x:Name="FindFigures_GroupBox" Header="Finded Figures" HorizontalAlignment="Left" Height="700" Margin="847,10,0,0" VerticalAlignment="Top" Width="217">
                     <Grid x:Name="GoupBox_Grid" HorizontalAlignment="Left" Height="668" VerticalAlignment="Top" Width="197" Margin="10,10,-2,0">
                         <Canvas x:Name="Figures_Canvas" HorizontalAlignment="Left" Height="658" VerticalAlignment="Top" Width="118">
-                            <Polygon Points="10,110 60,10 110,110" Fill="Black" Height="130" Canvas.Top="156" Width="118" />
-                            <Ellipse Canvas.Left="23" Fill="Black" Height="75" Width="75" Canvas.Top="10" />
-                            <Rectangle Width="100" Height="39" Fill="Black" Canvas.Left="10" Canvas.Top="400" />
-                            <Rectangle Width="70" Height="70" Fill="Black" Canvas.Left="23" Canvas.Top="560" />
+                            <Polygon Points="10,110 60,10 110,110" Fill="Red" Height="130" Canvas.Top="156" Width="118" />
+                            <Ellipse Canvas.Left="23" Fill="Red" Height="75" Width="75" Canvas.Top="10" />
+                            <Rectangle Width="100" Height="39" Fill="Red" Canvas.Left="10" Canvas.Top="400" />
+                            <Rectangle Width="70" Height="70" Fill="Red" Canvas.Left="23" Canvas.Top="560" />
                         </Canvas>
-                        <Label x:Name="Circles_Label" Content="{Binding Circles}" HorizontalAlignment="Left" Height="90" Margin="118,0,0,0" VerticalAlignment="Top" Width="79" FontSize="64" FontFamily="Segoe UI Black"/>
-                        <Label x:Name="Triangles_Label" Content="{Binding Triangles}" HorizontalAlignment="Left" Height="90" Margin="118,178,0,0" VerticalAlignment="Top" Width="79" FontSize="64" FontFamily="Segoe UI Black"/>
-                        <Label x:Name="Rectangle_Label" Content="{Binding Lines}" HorizontalAlignment="Left" Height="90" Margin="118,372,0,0" VerticalAlignment="Top" Width="79" FontSize="64" FontFamily="Segoe UI Black"/>
-                        <Label x:Name="Square_Label" Content="{Binding Squares}" HorizontalAlignment="Left" Height="90" Margin="118,550,0,0" VerticalAlignment="Top" Width="79" FontSize="64" FontFamily="Segoe UI Black"/>
+                        <Label x:Name="Circles_Label" Content="{Binding Circles}" HorizontalAlignment="Left" Height="90" Margin="118,0,0,0" VerticalAlignment="Top" Width="79" FontSize="64" FontFamily="Segoe UI Black" Foreground="Red"/>
+                        <Label x:Name="Triangles_Label" Content="{Binding Triangles}" HorizontalAlignment="Left" Height="90" Margin="118,178,0,0" VerticalAlignment="Top" Width="79" FontSize="64" FontFamily="Segoe UI Black" Foreground="Red"/>
+                        <Label x:Name="Rectangle_Label" Content="{Binding Lines}" HorizontalAlignment="Left" Height="90" Margin="118,372,0,0" VerticalAlignment="Top" Width="79" FontSize="64" FontFamily="Segoe UI Black" Foreground="Red"/>
+                        <Label x:Name="Square_Label" Content="{Binding Squares}" HorizontalAlignment="Left" Height="90" Margin="118,550,0,0" VerticalAlignment="Top" Width="79" FontSize="64" FontFamily="Segoe UI Black" Foreground="Red"/>
                     </Grid>
                 </GroupBox>
                 <Grid x:Name="ReacognitioCamera_Grid" HorizontalAlignment="Left" Height="669" Margin="0,51,0,0" VerticalAlignment="Top" Width="847">
@@ -93,23 +93,22 @@
         </TabItem>
         <TabItem x:Name="Calculation_Tab" Header="Calculation" GotFocus="Calculation_Tab_GotFocus">
             <Grid x:Name="Calculation_Grid">
-                <Button x:Name="Calculate_Button" Content="Расчитать" HorizontalAlignment="Left" Height="71" Margin="510,359,0,0" VerticalAlignment="Top" Width="496" Click="Button_Click"/>
-                <Label x:Name="OutputData_Label" Content="" HorizontalAlignment="Left" Height="202" Margin="510,157,0,0" VerticalAlignment="Top" Width="496" Background="#FFCBC6C6" FontSize="24"/>
+                <Label x:Name="OutputData_Label" Content="{Binding Path= CalculationResult, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="202" Margin="511,31,0,0" VerticalAlignment="Top" Width="496" Background="#FFCBC6C6" FontSize="24"/>
                 <GroupBox x:Name="Data_GroupBox" Header="Данные" HorizontalAlignment="Left" Height="700" Margin="20,10,0,0" VerticalAlignment="Top" Width="469">
                     <Grid x:Name="Calculation_Grid1" HorizontalAlignment="Left" Height="690" VerticalAlignment="Top" Width="459" Margin="0,0,-2,-12">
-                        <TextBox x:Name="R2_TextBox" HorizontalAlignment="Left" Margin="215,163,0,0" VerticalAlignment="Top" Style="{StaticResource TBGreyTheme}"/>
+                        <TextBox x:Name="R2_TextBox" Text="{Binding Path= SmallRadius, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="215,163,0,0" VerticalAlignment="Top" Style="{StaticResource TBGreyTheme}"/>
                         <Label x:Name="firstRadius_Label" Content="Меньший радиус" HorizontalAlignment="Left" Margin="0,163,0,0" VerticalAlignment="Top" Style="{StaticResource LabelGreyTheme}"/>
                         <Label x:Name="secondRadius_Label" Content="Больший радиус" HorizontalAlignment="Left" Margin="0,309,0,0" VerticalAlignment="Top" Style="{StaticResource LabelGreyTheme}"/>
-                        <TextBox x:Name="R1_TextBox" HorizontalAlignment="Left" Margin="215,309,0,0" VerticalAlignment="Top" Style="{StaticResource TBGreyTheme}"/>
+                        <TextBox x:Name="R1_TextBox" Text="{Binding Path=BigRadius, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="215,309,0,0" VerticalAlignment="Top" Style="{StaticResource TBGreyTheme}"/>
                         <Label x:Name="firstRadius_Label_Copy" Content="Радиус полости" HorizontalAlignment="Left" Margin="0,447,0,0" VerticalAlignment="Top" Style="{StaticResource LabelGreyTheme}"/>
-                        <TextBox x:Name="R3_TextBox" HorizontalAlignment="Left" Margin="214,447,0,0" VerticalAlignment="Top" Style="{StaticResource TBGreyTheme}"/>
+                        <TextBox x:Name="R3_TextBox" Text="{Binding Path=CavityRadius, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="214,447,0,0" VerticalAlignment="Top" Style="{StaticResource TBGreyTheme}"/>
                         <Label x:Name="firstRadius_Label_Copy1" Content="Общая длина" HorizontalAlignment="Left" Margin="0,585,0,0" VerticalAlignment="Top" Style="{StaticResource LabelGreyTheme}"/>
-                        <TextBox x:Name="Height_TextBox" HorizontalAlignment="Left"  Margin="215,585,0,0" VerticalAlignment="Top" Style="{StaticResource TBGreyTheme}"/>
+                        <TextBox x:Name="Height_TextBox" Text="{Binding Path=TotalLength, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"  Margin="215,585,0,0" VerticalAlignment="Top" Style="{StaticResource TBGreyTheme}"/>
                         <ComboBox x:Name="Density_CB" HorizontalAlignment="Left" Height="55" Margin="10,27,0,0" VerticalAlignment="Top" Width="200" FontSize="20">
-                            <ComboBoxItem x:Name="AF_CBItem" Content="AF" IsSelected="True"/>
-                            <ComboBoxItem x:Name="BF_IC_CBItem" Content="BF IC"/>
-                            <ComboBoxItem x:Name="FPF_CBItem" Content="FPF"/>
-                            <ComboBoxItem x:Name="TF_JRA_CBItem" Content="TF - JRA"/>
+                            <ComboBoxItem x:Name="AF_CBItem" Content="AF" IsSelected="True" Selected="AF_CBItem_Selected"/>
+                            <ComboBoxItem x:Name="BF_IC_CBItem" Content="BF IC" Selected="BF_IC_CBItem_Selected"/>
+                            <ComboBoxItem x:Name="FPF_CBItem" Content="FPF" Selected="FPF_CBItem_Selected"/>
+                            <ComboBoxItem x:Name="TF_JRA_CBItem" Content="TF - JRA" Selected="TF_JRA_CBItem_Selected"/>
                         </ComboBox>
                     </Grid>
                 </GroupBox>

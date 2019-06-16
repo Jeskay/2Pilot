@@ -46,7 +46,7 @@ namespace WpfApp3_joystick
         private UARTConnection UARTconnection = new UARTConnection();
         private UARTModelView UARTmv = new UARTModelView(new UARTModel());
         private FiguresView figuresView = new FiguresView(new FiguresModel());
-        private MainView mainView = new MainView(new MainModel());
+        public MainView mainView = new MainView(new MainModel());
 
         private int ActivatedWindow = 1;
 
@@ -56,6 +56,7 @@ namespace WpfApp3_joystick
             Firstcapture.FlipHorizontal = true;
             GoupBox_Grid.DataContext = figuresView;
             Main_Grid1.DataContext = UARTmv;
+            Calculation_Grid.DataContext = mainView;
         }
         private void MainWin_Loaded(object sender, RoutedEventArgs e)
         {
@@ -153,7 +154,7 @@ namespace WpfApp3_joystick
                     ImageWebcam1.Source = BitmapSourceConvert.ToBitmapSource(mainView.RulerCamera.QueryFrame().ToImage<Bgr, Byte>());
                     break;
                 case 2:
-                    Image1.Source = Recognition.FindFigures(mainView.RecognitionCamera.QueryFrame());
+                    Image1.Source = Recognition.FindFigures(mainView.RecognitionCamera.QueryFrame());//CvInvoke.Imread("C:\\Users\\Валера\\Pictures\\Saved Pictures\\2.png"));
                     break;
                 case 3:
                     MicroROV_Image.Source = BitmapSourceConvert.ToBitmapSource(mainView.MicroROVCamera.QueryFrame().ToImage<Bgr, Byte>());
@@ -187,7 +188,7 @@ namespace WpfApp3_joystick
             else if (Density_CB.SelectedItem == BF_IC_CBItem) Density = Iron;
             else if (Density_CB.SelectedItem == FPF_CBItem) Density = Iron;
             else if (Density_CB.SelectedItem == TF_JRA_CBItem) Density = Iron;
-            double R1 = Convert.ToDouble(R1_TextBox.Text);
+            double R1 = Convert.ToDouble(mainView.BigRadius);
             double R2 = Convert.ToDouble(R2_TextBox.Text);
             double R3 = Convert.ToDouble(R3_TextBox.Text);
             double L = Convert.ToDouble(Height_TextBox.Text);
@@ -335,6 +336,26 @@ namespace WpfApp3_joystick
             {
                 UARTmv.LightBrightness = 0;
             }
+        }
+
+        private void AF_CBItem_Selected(object sender, RoutedEventArgs e)
+        {
+            mainView.Density = 8.03;
+        }
+
+        private void BF_IC_CBItem_Selected(object sender, RoutedEventArgs e)
+        {
+            mainView.Density = 7.87;
+        }
+
+        private void FPF_CBItem_Selected(object sender, RoutedEventArgs e)
+        {
+            mainView.Density = 7.87;
+        }
+
+        private void TF_JRA_CBItem_Selected(object sender, RoutedEventArgs e)
+        {
+            mainView.Density = 7.87;
         }
     }
 }

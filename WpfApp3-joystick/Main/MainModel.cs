@@ -13,7 +13,45 @@ namespace WpfApp3_joystick
         private VideoCapture rulerCamera;
         private VideoCapture recognitionCamera;
         private VideoCapture microROVCamera;
+        private string smallRadius;
+        private string bigRadius;
+        private string cavityRadius;
+        private string totalLenght;
+        private string calculationResult;
+        private double density;
+
         public int SelectedWindow = 1;
+
+        public double Density
+        {
+            get { return density; }
+            set { density = value; }
+        }
+        public string CalculationResult
+        {
+            get { return calculationResult; }
+            set { calculationResult = value; }
+        }
+        public string SmallRadius
+        {
+            get { return smallRadius;  }
+            set { smallRadius = value; }
+        }
+        public string BigRadius
+        {
+            get { return bigRadius; }
+            set { bigRadius = value; }
+        }
+        public string CavityRadius
+        {
+            get { return cavityRadius; }
+            set { cavityRadius = value; }
+        }
+        public string TotalLenght
+        {
+            get { return totalLenght; }
+            set { totalLenght = value; }
+        }
         public VideoCapture RulerCamera
         {
             get { return rulerCamera; }
