@@ -67,3 +67,4 @@ C:\Users\Валера\source\repos\WpfApp3-joystick-2c375ab88b607d435fe107c86fe8
 C:\Users\Валера\source\repos\WpfApp3-joystick-2c375ab88b607d435fe107c86fe8b69e0d954f0f\WpfApp3-joystick\obj\Release\WpfApp3-joystick.csproj.CopyComplete
 C:\Users\Валера\source\repos\WpfApp3-joystick-2c375ab88b607d435fe107c86fe8b69e0d954f0f\WpfApp3-joystick\obj\Release\WpfApp3-joystick.exe
 C:\Users\Валера\source\repos\WpfApp3-joystick-2c375ab88b607d435fe107c86fe8b69e0d954f0f\WpfApp3-joystick\obj\Release\WpfApp3-joystick.pdb
+C:\Users\Валера\source\repos\WpfApp3-joystick-2c375ab88b607d435fe107c86fe8b69e0d954f0f\WpfApp3-joystick\obj\Release\WpfApp3-joystick.csprojAssemblyReference.cache

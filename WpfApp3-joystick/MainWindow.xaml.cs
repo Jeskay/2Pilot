@@ -49,6 +49,7 @@ namespace WpfApp3_joystick
         public MainView mainView = new MainView(new MainModel());
 
         private int ActivatedWindow = 1;
+        private bool IsPaused = false;
 
         public MainWindow()
         {
@@ -154,7 +155,7 @@ namespace WpfApp3_joystick
                     ImageWebcam1.Source = BitmapSourceConvert.ToBitmapSource(mainView.RulerCamera.QueryFrame().ToImage<Bgr, Byte>());
                     break;
                 case 2:
-                    Image1.Source = Recognition.FindFigures(mainView.RecognitionCamera.QueryFrame());//CvInvoke.Imread("C:\\Users\\Валера\\Pictures\\Saved Pictures\\2.png"));
+                    if(!IsPaused)Image1.Source = Recognition.FindFigures(mainView.RecognitionCamera.QueryFrame());//CvInvoke.Imread("C:\\Users\\Валера\\Pictures\\Saved Pictures\\creative.png")); 
                     break;
                 case 3:
                     MicroROV_Image.Source = BitmapSourceConvert.ToBitmapSource(mainView.MicroROVCamera.QueryFrame().ToImage<Bgr, Byte>());
@@ -356,6 +357,15 @@ namespace WpfApp3_joystick
         private void TF_JRA_CBItem_Selected(object sender, RoutedEventArgs e)
         {
             mainView.Density = 7.87;
+        }
+
+        private void Recognition_Tab_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.P)
+            {
+                if (IsPaused) IsPaused = false;
+                else IsPaused = true;
+            }
         }
     }
 }

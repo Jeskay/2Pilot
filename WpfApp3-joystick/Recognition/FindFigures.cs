@@ -69,11 +69,12 @@ namespace WpfApp3_joystick
             if (source.IsEmpty) return source;
             /// конвертация изображения в серое
             CvInvoke.CvtColor(source, binMat, ColorConversion.Bgr2Gray);
+            CvInvoke.Imshow("black and white", binMat);
             /// бинаризация черно-белой картинки
             CvInvoke.Threshold(binMat, bin1Mat, 100, 200, ThresholdType.Binary);
             CvInvoke.Threshold(bin1Mat, bin1Mat, 25, 255, ThresholdType.BinaryInv);
             CvInvoke.Threshold(bin1Mat, bin1Mat, 0, 255, ThresholdType.Otsu);
-            //CvInvoke.Imshow("BIN", bin1Mat);
+            CvInvoke.Imshow("BIN", bin1Mat);
             return bin1Mat;
         }
         public Rectangle  AreaExtracting(Mat inputimage)
@@ -98,7 +99,7 @@ namespace WpfApp3_joystick
             /// поиск контуров и их отрисовка на изображениии
             CvInvoke.FindContours(bin1Mat, contours, hierarchy, RetrType.External, ChainApproxMethod.ChainApproxSimple);
             CvInvoke.DrawContours(bin1Mat, contours, -1, new MCvScalar(100, 0, 0), 4);
-
+            CvInvoke.Imshow("Contours", bin1Mat);
             return contours;
         }
         public bool Inrectangle(Rectangle rect, VectorOfPoint hull)
@@ -214,7 +215,7 @@ namespace WpfApp3_joystick
             Console.WriteLine(hull.Size);
 
             VectorOfPoint newhull = new VectorOfPoint();
-            CvInvoke.ApproxPolyDP(hull, newhull, 10, true);
+            CvInvoke.ApproxPolyDP(hull, newhull, 5, true);
             if (newhull.Size == 3) return true;
             else return false;
         }
